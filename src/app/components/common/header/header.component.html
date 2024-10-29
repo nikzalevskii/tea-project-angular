@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+  <div class="container-fluid">
+
+    <div class="navbar-collapse d-sm-flex justify-content-sm-center align-items-center flex-wrap"
+         id="navbarSupportedContent">
+      <a class="navbar-brand mb-2 mb-lg-0" [routerLink]="'/'">Logo</a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-3 flex-wrap">
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/'">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="'/products'">Каталог</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Поиск чая" aria-label="Search">
+        <button class="btn btn-outline-primary" type="button">Найти</button>
+      </form>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,46 @@
+<div class="banner container py-5">
+  <div class="banner_slider">
+    <div class="banner__item">
+      <img class="banner_img w-100" src="assets/images/banner_1.png" alt="banner1">
+    </div>
+  </div>
+</div>
+
+<div class="questions container my-5 ">
+  <h2 class="questions__text text-center my-4">Ответы на часто задаваемые вопросы</h2>
+  <div id="accordion" class="w-75">
+    <h3 class="mb-2 accordion_btn accordion_btn">Собираете ли
+      вы подарочные боксы?</h3>
+    <div>
+      <p>Да, у нас есть такая услуга. Мы можем собрать подарочный бокс на любой вкус, объем и стоимость!</p>
+    </div>
+    <h3 class="mb-2 d-flex accordion_btn">Сколько у вас разновидностей
+      чая?</h3>
+    <div>
+      <p>В ассортименте более 50 разновидностей чая! Можем подобрать для Вас подходящий.</p>
+    </div>
+    <h3 class="mb-2 d-flex accordion_btn">В какой срок осуществляется
+      доставка?</h3>
+    <div>
+      <p>Действует самовывоз в день оформления заказа (включая выходные). Также можно оформить доставку на
+        следующий день или позднее.</p>
+    </div>
+    <h3 class="mb-2 d-flex accordion_btn">У вас обновляется
+      ассортимент?</h3>
+    <div>
+      <p>Да, ассортимент обновляется постоянно. Новинки располагаются в соответствующем разделе.</p>
+    </div>
+    <h3 class="mb-2 d-flex accordion_btn">Какого объема у вас пачки
+      чая?</h3>
+    <div>
+      <p>Одна пачка весит 100 грамм.</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showPopup" class="main-popup">
+  <div class="popup_container">
+    <h3 class="popup_header">Посмотрите наши чайные коллекции</h3>
+    <a [routerLink]="'/products'" class="popup-action">Смотреть</a>
+  </div>
+</div>

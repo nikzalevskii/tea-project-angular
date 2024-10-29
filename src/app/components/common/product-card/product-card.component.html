@@ -1,0 +1,8 @@
+<div class="collection__card card">
+  <img src="{{ product.image }}" class="card-img-top" alt="card1">
+  <div class="card-body">
+    <p class="card-title fs-5">{{ product.price }} руб.</p>
+    <h2 class="card-text fw-bold">{{ product.title }}</h2>
+    <a [routerLink]="['/products', product.id]" class="btn card-body-btn btn-primary w-50 ">Подробнее</a>
+  </div>
+</div>

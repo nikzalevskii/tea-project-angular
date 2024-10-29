@@ -1,0 +1,39 @@
+.product-block {
+
+  .product-card {
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+
+    .product-card-img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+
+    .product-card-block {
+      .product-card-description {
+        font-size: 13px;
+      }
+
+      .product-card-action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .product-card-btn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          max-width: 200px;
+        }
+      }
+
+    }
+
+  }
+}
+
+

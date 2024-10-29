@@ -1,0 +1,13 @@
+<div class="product-block bg-light">
+  <div class="collection__card card product-card">
+    <img src="{{ product.image }}" class="card-img-top product-card-img" alt="card1">
+    <div class="card-body product-card-block">
+      <p class="card-title fs-5 product-card-price">{{ product.price }} руб.</p>
+      <h2 class="card-text fw-bold product-card-title">{{ product.title }}</h2>
+      <p class="card-text product-card-description">{{ product.description }}</p>
+      <div class="product-card-action">
+        <a [routerLink]="'/order'" [queryParams]="{product: product.title}" class="btn card-body-btn btn-primary w-50 product-card-btn">Купить</a>
+      </div>
+    </div>
+  </div>
+</div>

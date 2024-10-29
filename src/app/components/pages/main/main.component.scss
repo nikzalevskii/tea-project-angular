@@ -1,0 +1,80 @@
+/*  ACCORDION JQUERY UI  ********************************************************************************* */
+
+#accordion {
+  margin: 0 auto;
+}
+
+#accordion p {
+  font-size: 16px;
+}
+
+.ui-state-default {
+  background: linear-gradient(0deg, #076BFF 0%, #007BFF 100%);
+}
+
+.ui-corner-all, .ui-corner-top {
+  color: white;
+}
+
+.ui-accordion .ui-accordion-header {
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.ui-accordion, .ui-accordion-content {
+  /*overflow: unset!important;*/
+}
+
+.ui-accordion-content {
+  border: none !important;
+}
+
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon.ui-icon.ui-icon-caret-1-s,
+.ui-accordion .ui-accordion-header .ui-accordion-header-icon.ui-icon.ui-icon-caret-1-n {
+  position: absolute!important;
+  right: 10px!important; /* Установите иконку справа */
+  top: calc(50% + 4px)!important; /* По центру вертикально */
+  transform: translateY(-50%)!important; /* Для корректного центрирования */
+  background-image: url("/assets/images/ui-icons/ui-icons_ffffff_256x240.png") !important; /* Белая иконка */
+}
+
+/*  ACCORDION JQUERY UI  ********************************************************************************* */
+
+/*  POPUP  ********************************************************************************* */
+.main-popup {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(68, 55, 55, 0.56);
+
+  .popup_container {
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #bb87bb;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .popup-action {
+      margin-top: 15px;
+      border: 1px solid #3d3737;
+      border-radius: 10px;
+      width: 150px;
+      background-color: #eee3ee;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+/*  POPUP  ********************************************************************************* */
