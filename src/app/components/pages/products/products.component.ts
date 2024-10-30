@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(private httpService:HttpServiceService, private router: Router, private searchService:SearchService) { }
 
   ngOnDestroy() {
-    this.productSubscription?.unsubscribe();
+    this.searchService.clearSearchQuery();
     this.searchSubscription?.unsubscribe();
 
   }
@@ -28,12 +28,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loading = true;
     this.notFound = false;
-    this.searchService.updateSearchQuery('');
     this.searchSubscription = this.searchService.searchQuery$.subscribe(query => {
       this.fetchProducts(query);
       this.updateTitle(query);
     });
-    this.fetchProducts('');
   }
 
   fetchProducts(query:string) {

@@ -12,5 +12,9 @@ export class SearchService {
     this.searchQuerySubject.next(query);
 
   }
+
+  clearSearchQuery() {
+    this.searchQuerySubject.next('');
+  }
   constructor() { }
 }

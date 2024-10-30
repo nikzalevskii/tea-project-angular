@@ -55,19 +55,3 @@ export class ProductComponent implements OnInit {
 
 
 
-
-// this.activatedRoute.params.subscribe((params) => {
-//   if (params['id']) {
-//     this.httpService.getProduct(+params['id'])
-//       .subscribe({
-//         next: (data) => {
-//           console.log(data);
-//           this.product = data;
-//         },
-//         error: (error) => {
-//           this.router.navigate(['/']);
-//         }
-//       })
-//   }
-// })
-
