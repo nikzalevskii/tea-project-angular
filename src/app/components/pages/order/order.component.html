@@ -1,50 +1,103 @@
-<div class="form container my-4 w-50 ">
-  <h2 class="form__text text-center my-4">Сделать заказ</h2>
-  <form class="d-flex flex-column justify-content-between form_to_fill" id="order">
+<h1 *ngIf="isError" class="error-order">Ошибка при отправке заказа. Пожалуйста, попробуйте снова.</h1>
+<div *ngIf="!isOrdered" class="form container my-4 w-50 ">
+  <h2 *ngIf="!isError" class="form__text text-center my-4">Сделать заказ</h2>
+  <form *ngIf="!isError" [formGroup]="orderForm" novalidate class="d-flex flex-column justify-content-between form_to_fill" id="order">
     <div class="row d-flex align-items-center">
       <div class="col-12 col-md-6 col-lg-6 ">
-        <div class="mb-3 ">
+        <div class="mb-4 ">
           <label for="product_title" class="form-label">Товар</label>
-          <input type="text" class="form-control" id="product_title">
+          <input readonly formControlName="product" type="text" class="form-control" id="product_title">
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6 ">
-        <div class="mb-3 ">
+        <div class="mb-4 ">
           <label for="comment" class="form-label">Комментарий к заказу</label>
-          <input type="text" class="form-control" id="comment">
+          <input formControlName="comment" type="text" class="form-control" id="comment">
         </div>
       </div>
       <div class="col-12 col-md-6 col-lg-6 ">
-        <div class="mb-3 ">
+        <div class="mb-4 ">
           <label for="surname" class="form-label">Фамилия</label>
-          <input type="text" class="form-control" id="surname">
+          <input formControlName="last_name" type="text" class="form-control" id="surname">
+          <div class="form-block" *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)">
+            <div class="text-danger" *ngIf="lastName?.errors?.['required']">
+              Введите фамилию
+            </div>
+            <div class="text-danger" *ngIf="!lastName?.errors?.['required'] ?? lastName?.errors?.['name']">
+              Фамилия должна содержать только буквы
+            </div>
+          </div>
+
         </div>
       </div>
-      <div class="col-12 col-md-6 col-lg-6">
-        <div class="mb-3">
+      <div class="col-12 col-md-6 col-lg-6 ">
+        <div class="mb-4 ">
+          <label for="name" class="form-label">Имя</label>
+          <input formControlName="name" type="text" class="form-control" id="name">
+          <div class="form-block" *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+            <div class="text-danger" *ngIf="name?.errors?.['required']">
+              Введите имя
+            </div>
+            <div class="text-danger" *ngIf="!name?.errors?.['required'] ?? name?.errors?.['name']">
+              Имя должно содержать только буквы
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="mb-4">
           <label for="phone" class="form-label">Телефон</label>
-          <input type="tel" class="form-control" id="phone">
+          <input formControlName="phone" type="tel" class="form-control" id="phone">
+          <div class="form-block" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
+            <div class="text-danger" *ngIf="phone?.errors?.['required']">
+              Введите телефон
+            </div>
+            <div class="text-danger" *ngIf="!phone?.errors?.['required'] ?? phone?.errors?.['phone']">
+              Минимум 11 цифр. Можно + в начале
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
+      <div class="col-12 col-md-4">
+        <div class="mb-4">
           <label for="country" class="form-label">Страна</label>
-          <input type="text" class="form-control" id="country">
+          <input formControlName="country" type="text" class="form-control" id="country">
+          <div class="form-block" *ngIf="country?.invalid && (country?.dirty || country?.touched)">
+            <div class="text-danger" *ngIf="country?.errors?.['required']">
+              Введите страну
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-12 col-lg-6">
-        <div class="mb-3">
+      <div class="col-12 col-lg-4">
+        <div class="mb-4">
           <label for="index" class="form-label">Индекс</label>
-          <input type="text" class="form-control" id="index">
+          <input formControlName="zip" type="text" class="form-control" id="index">
+          <div class="form-block" *ngIf="zip?.invalid && (zip?.dirty || zip?.touched)">
+            <div class="text-danger" *ngIf="zip?.errors?.['required']">
+              Введите индекс
+            </div>
+          </div>
         </div>
       </div>
       <div class="col-12">
-        <div class="mb-3">
+        <div class="mb-4">
           <label for="address" class="form-label">Адрес</label>
-          <input type="text" class="form-control" id="address">
+          <input formControlName="address" type="text" class="form-control" id="address">
+          <div class="form-block" *ngIf="address?.invalid && (address?.dirty || address?.touched)">
+            <div class="text-danger" *ngIf="address?.errors?.['required']">
+              Введите адрес
+            </div>
+            <div class="text-danger" *ngIf="!address?.errors?.['required'] ?? address?.errors?.['phone']">
+              Адрес не может содержать ничего кроме букв, цифр, пробела, - и /
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <a href="#order" class="btn form-button btn-primary hvr-shrink" id="button" style="width: 140px">Отправить</a>
+    <button (click)="createOrder()" type="submit" [disabled]="!orderForm.valid" class="btn form-button btn-primary hvr-shrink" id="button" style="width: 140px">Отправить</button>
   </form>
 </div>
+<h3 *ngIf="isOrdered" class="ordered">Спасибо за заказ</h3>
+
+

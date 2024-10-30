@@ -6,8 +6,11 @@
       <h2 class="card-text fw-bold product-card-title">{{ product.title }}</h2>
       <p class="card-text product-card-description">{{ product.description }}</p>
       <div class="product-card-action">
-        <a [routerLink]="'/order'" [queryParams]="{product: product.title}" class="btn card-body-btn btn-primary w-50 product-card-btn">Купить</a>
+        <a [routerLink]="'/order'" [queryParams]="{product_title: product.title}" class="btn card-body-btn btn-primary w-50 product-card-btn">Купить</a>
       </div>
+    </div>
+    <div *ngIf="loading" class="loader-bg">
+      <div class="loader"></div>
     </div>
   </div>
 </div>

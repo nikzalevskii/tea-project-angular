@@ -9,7 +9,7 @@ import { MainComponent } from './components/pages/main/main.component';
 import { OrderComponent } from './components/pages/order/order.component';
 import { ProductsComponent } from './components/pages/products/products.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductCardComponent } from './components/common/product-card/product-card.component';
 import { ProductComponent } from './components/pages/product/product.component';
 
@@ -28,7 +28,8 @@ import { ProductComponent } from './components/pages/product/product.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

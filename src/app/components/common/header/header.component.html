@@ -14,8 +14,9 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Поиск чая" aria-label="Search">
-        <button class="btn btn-outline-primary" type="button">Найти</button>
+        <input name="search" [(ngModel)]="searchQuery" class="form-control me-2" type="text" placeholder="Поиск чая">
+        <button class="btn btn-outline-primary" type="button" (click)="onSearch()">Найти</button>
+        <button class="btn ms-2 btn-outline-primary" type="button" (click)="onReset()" >Сброс</button>
       </form>
     </div>
   </div>

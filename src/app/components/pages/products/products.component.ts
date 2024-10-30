@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {BehaviorSubject, Subscription, tap} from "rxjs";
 import {HttpServiceService} from "../../../services/http-service.service";
 import {Router} from "@angular/router";
 import {ProductType} from "../../../types/product.type";
+import {SearchService} from "../../../services/search.service";
 
 @Component({
   selector: 'app-products',
@@ -10,22 +11,51 @@ import {ProductType} from "../../../types/product.type";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
+  loading:boolean = false;
   public products:ProductType[] = [];
   productSubscription: Subscription | null = null;
-  constructor(private httpService:HttpServiceService, private router: Router) { }
+  public title: string = 'Наши чайные коллекции';
+  searchSubscription: Subscription | null = null;
+  notFound:boolean = false;
+  constructor(private httpService:HttpServiceService, private router: Router, private searchService:SearchService) { }
 
   ngOnDestroy() {
     this.productSubscription?.unsubscribe();
+    this.searchSubscription?.unsubscribe();
 
   }
 
   ngOnInit(): void {
-    this.productSubscription = this.httpService.getProducts()
+    this.loading = true;
+    this.notFound = false;
+    this.searchService.updateSearchQuery('');
+    this.searchSubscription = this.searchService.searchQuery$.subscribe(query => {
+      this.fetchProducts(query);
+      this.updateTitle(query);
+    });
+    this.fetchProducts('');
+  }
+
+  fetchProducts(query:string) {
+    this.loading = true;
+    let apiUrl = 'https://testologia.ru/tea';
+    if (query) {
+      apiUrl += `?search=${query}`;
+    }
+    this.productSubscription = this.httpService.searchProducts(apiUrl)
+      .pipe(
+        tap(() => {
+          this.loading = false;
+        })
+      )
       .subscribe(
         {
           next: (data) => {
             this.products = data;
-            // console.log(data);
+            if (!this.products.length) {
+              this.notFound = true;
+            }
+            console.log(data);
           },
           error:(error) => {
             this.router.navigate(['/']);
@@ -33,5 +63,30 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
       )
   }
+
+  updateTitle(query:string) {
+    this.title = query ? `Результаты поиска по запросу "${query}"` : 'Наши чайные коллекции';
+  }
+
+
+
+    // this.productSubscription = this.httpService.getProducts()
+    //   .pipe(
+    //     tap(() => {
+    //       this.loading = false;
+    //     })
+    //   )
+    //   .subscribe(
+    //     {
+    //       next: (data) => {
+    //         this.products = data;
+    //         // console.log(data);
+    //       },
+    //       error:(error) => {
+    //         this.router.navigate(['/']);
+    //       }
+    //     }
+    //   )
+
 
 }
