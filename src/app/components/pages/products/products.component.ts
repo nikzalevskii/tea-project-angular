@@ -4,6 +4,7 @@ import {HttpServiceService} from "../../../services/http-service.service";
 import {Router} from "@angular/router";
 import {ProductType} from "../../../types/product.type";
 import {SearchService} from "../../../services/search.service";
+import {API_URL} from "../../../shared/constants/constants";
 
 @Component({
   selector: 'app-products',
@@ -11,15 +12,15 @@ import {SearchService} from "../../../services/search.service";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  loading:boolean = false;
+  public loading:boolean = false;
   public products:ProductType[] = [];
-  productSubscription: Subscription | null = null;
+  public productSubscription: Subscription | null = null;
   public title: string = 'Наши чайные коллекции';
-  searchSubscription: Subscription | null = null;
-  notFound:boolean = false;
+  public searchSubscription: Subscription | null = null;
+  public notFound:boolean = false;
   constructor(private httpService:HttpServiceService, private router: Router, private searchService:SearchService) { }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.searchService.clearSearchQuery();
     this.searchSubscription?.unsubscribe();
 
@@ -34,9 +35,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     });
   }
 
-  fetchProducts(query:string) {
+  fetchProducts(query:string): void {
+    this.notFound = false;
     this.loading = true;
-    let apiUrl = 'https://testologia.ru/tea';
+    let apiUrl = API_URL;
     if (query) {
       apiUrl += `?search=${query}`;
     }
@@ -48,12 +50,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         {
-          next: (data) => {
+          next: (data:ProductType[]) => {
             this.products = data;
             if (!this.products.length) {
               this.notFound = true;
             }
-            console.log(data);
           },
           error:(error) => {
             this.router.navigate(['/']);
@@ -68,23 +69,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
 
-    // this.productSubscription = this.httpService.getProducts()
-    //   .pipe(
-    //     tap(() => {
-    //       this.loading = false;
-    //     })
-    //   )
-    //   .subscribe(
-    //     {
-    //       next: (data) => {
-    //         this.products = data;
-    //         // console.log(data);
-    //       },
-    //       error:(error) => {
-    //         this.router.navigate(['/']);
-    //       }
-    //     }
-    //   )
 
 
 }

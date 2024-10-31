@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ProductType} from "../types/product.type";
 import {OrderType} from "../types/order.type";
+import {API_URL, API_URL_ORDER} from "../shared/constants/constants";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class HttpServiceService {
   }
 
   getProducts(): Observable<ProductType[]> {
-    return this.http.get<ProductType[]>('https://testologia.ru/tea');
+    return this.http.get<ProductType[]>(API_URL);
   }
 
   searchProducts(url:string): Observable<ProductType[]> {
@@ -21,7 +22,7 @@ export class HttpServiceService {
   }
 
   createOrder(data: OrderType) {
-    return this.http.post<{success: boolean, message?: string}>('https://testologia.ru/order-tea', data);
+    return this.http.post<{success: boolean, message?: string}>(API_URL_ORDER, data);
   }
 
 

@@ -26,7 +26,6 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.activatedRoute.params.subscribe((params) => {
-      // console.log(params);
       if (params['id']) {
         this.httpService.getProducts()
           .pipe(
@@ -35,12 +34,10 @@ export class ProductComponent implements OnInit {
             })
           )
           .subscribe({
-            next: (data) => {
-              // console.log(+params['id']);
-              const product_find = data.find(item => item.id === +params['id']);
+            next: (data: ProductType[]) => {
+              const product_find:ProductType | undefined = data.find(item => item.id === +params['id']);
               if (product_find) {
                 this.product = product_find;
-                // console.log(this.product);
               }
             },
             error: (error) => {

@@ -11,8 +11,8 @@ import {CustomValidators} from "../../../shared/custom-validators";
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit, OnDestroy {
-  isError:boolean = false;
-  orderForm!: FormGroup;
+  public isError:boolean = false;
+  public orderForm!: FormGroup;
   private subscription: Subscription | null = null;
   private subscriptionOrder: Subscription | null = null;
   public isOrdered:boolean = false;
@@ -71,15 +71,14 @@ export class OrderComponent implements OnInit, OnDestroy {
       comment: this.orderForm.value.comment,
     })
       .subscribe({
-        next: (response) => {
+        next: (response: { success: boolean; message?: string }) => {
           if (response && response.success) {
-            console.log(response.success);
             this.isOrdered = true;
           } else {
             alert('Ошибка');
           }
         },
-        error: (error) => {
+        error: (error):void => {
           this.isError = true;
           this.orderForm.reset();
           setTimeout(() => {

@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class SearchService {
   private searchQuerySubject = new BehaviorSubject<string>('');
-  searchQuery$ = this.searchQuerySubject.asObservable();
+  public searchQuery$ = this.searchQuerySubject.asObservable();
 
   updateSearchQuery(query:string) {
     this.searchQuerySubject.next(query);

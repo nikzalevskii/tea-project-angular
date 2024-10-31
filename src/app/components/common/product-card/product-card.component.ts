@@ -6,14 +6,11 @@ import {ProductType} from "../../../types/product.type";
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent  {
 @Input() product!:ProductType;
   constructor() {
 
   }
 
-  ngOnInit(): void {
-    // console.log(this.product);
-  }
 
 }
