@@ -1,4 +1,4 @@
-export type OrderType = {
+export type OrderInterface = {
   name: string,
   last_name: string,
   phone: string,

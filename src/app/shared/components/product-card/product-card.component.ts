@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ProductType} from "../../../types/product.type";
+import {ProductInterface} from "../../../../interfaces/product.interface";
 
 @Component({
   selector: 'product-card',
@@ -7,7 +7,7 @@ import {ProductType} from "../../../types/product.type";
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent  {
-@Input() product!:ProductType;
+@Input() product!:ProductInterface;
   constructor() {
 
   }

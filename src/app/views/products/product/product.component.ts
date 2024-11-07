@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductType} from "../../../types/product.type";
+import {ProductInterface} from "../../../../interfaces/product.interface";
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpServiceService} from "../../../services/http-service.service";
+import {HttpService} from "../../../shared/services/http.service";
 import {tap} from "rxjs";
 
 @Component({
@@ -10,10 +10,10 @@ import {tap} from "rxjs";
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  product: ProductType;
+  product: ProductInterface;
   loading:boolean = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpServiceService, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private httpService: HttpService, private router: Router) {
     this.product = {
       description: '',
       id: 0,
@@ -34,8 +34,8 @@ export class ProductComponent implements OnInit {
             })
           )
           .subscribe({
-            next: (data: ProductType[]) => {
-              const product_find:ProductType | undefined = data.find(item => item.id === +params['id']);
+            next: (data: ProductInterface[]) => {
+              const product_find:ProductInterface | undefined = data.find(item => item.id === +params['id']);
               if (product_find) {
                 this.product = product_find;
               }

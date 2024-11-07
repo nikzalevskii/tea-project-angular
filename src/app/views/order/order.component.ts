@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {HttpServiceService} from "../../../services/http-service.service";
+import {HttpService} from "../../shared/services/http.service";
 import {Subscription} from "rxjs";
-import {CustomValidators} from "../../../shared/custom-validators";
+import {CustomValidators} from "../../shared/customs/custom-validators";
 
 @Component({
   selector: 'app-order',
@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit, OnDestroy {
   private subscriptionOrder: Subscription | null = null;
   public isOrdered:boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private httpService: HttpServiceService, private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private router: Router, private httpService: HttpService, private activatedRoute: ActivatedRoute) {
     this.orderForm = this.fb.group({
       name: ['', {
         validators: [Validators.required, CustomValidators.nameValidator],

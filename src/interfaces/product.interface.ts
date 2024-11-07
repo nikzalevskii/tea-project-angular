@@ -1,4 +1,4 @@
-export type ProductType = {
+export type ProductInterface = {
   description:string,
   id:number,
   image:string,

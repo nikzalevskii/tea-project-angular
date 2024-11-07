@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subscription, tap} from "rxjs";
-import {HttpServiceService} from "../../../services/http-service.service";
+import {HttpService} from "../../../shared/services/http.service";
 import {Router} from "@angular/router";
-import {ProductType} from "../../../types/product.type";
-import {SearchService} from "../../../services/search.service";
+import {ProductInterface} from "../../../../interfaces/product.interface";
+import {SearchService} from "../../../shared/services/search.service";
 import {API_URL} from "../../../shared/constants/constants";
 
 @Component({
@@ -13,12 +13,12 @@ import {API_URL} from "../../../shared/constants/constants";
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   public loading:boolean = false;
-  public products:ProductType[] = [];
+  public products:ProductInterface[] = [];
   public productSubscription: Subscription | null = null;
   public title: string = 'Наши чайные коллекции';
   public searchSubscription: Subscription | null = null;
   public notFound:boolean = false;
-  constructor(private httpService:HttpServiceService, private router: Router, private searchService:SearchService) { }
+  constructor(private httpService:HttpService, private router: Router, private searchService:SearchService) { }
 
   ngOnDestroy(): void {
     this.searchService.clearSearchQuery();
@@ -50,7 +50,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         {
-          next: (data:ProductType[]) => {
+          next: (data:ProductInterface[]) => {
             this.products = data;
             if (!this.products.length) {
               this.notFound = true;
